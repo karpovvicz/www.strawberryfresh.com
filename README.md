@@ -3,7 +3,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-18.x-green?logo=node.js)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-Welcome to the official repository for [StrawberryFresh](https://www.strawberryfresh.com) – your go-to platform for fresh strawberries delivered to your doorstep.
+Welcome to the official repository for [StrawberryFresh](https://www.strawberryfresh.com) – your go-to platform for fresh content delivered to your doorstep.
 
 Visit our website: [www.strawberryfresh.com](https://www.strawberryfresh.com)
 
