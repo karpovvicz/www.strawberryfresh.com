@@ -1,0 +1,394 @@
+/* Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 0;
+}
+
+/* Drawer container */
+.drawer {
+    position: relative;
+    width: 20rem;
+    max-width: 100%;
+    height: 100%;
+    background: white;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 10;
+    animation: slide-in-left 0.3s ease-out forwards;
+    overflow-y: auto;
+}
+
+/* Dark mode drawer */
+:global(.dark) .drawer {
+    background: #111111;
+    border-right: 1px solid rgba(245, 245, 245, 0.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode header */
+:global(.dark) .header {
+    border-bottom: 1px solid rgba(245, 245, 245, 0.1);
+    background: #181818;
+}
+
+/* Logo styles */
+.logo {
+    font-family: 'More Sugar', sans-serif;
+    font-size: 1.75rem;
+    color: #0c1507 !important;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    color: #d83e3e;
+}
+
+/* Dark mode logo */
+:global(.dark) .logo {
+    color: black;
+}
+
+:global(.dark) .logo:hover {
+    color: #ff6b6b !important;
+}
+
+/* Close button */
+.closeButton {
+    font-size: 1.25rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 9999px;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeButton:hover {
+    background: rgba(255, 192, 203, 0.6);
+    transform: scale(1.1);
+}
+
+/* Dark mode close button */
+:global(.dark) .closeButton {
+    background: rgba(64, 64, 64, 0.7);
+    border: 1px solid rgba(245, 245, 245, 0.2);
+    color: #f5f5f5;
+}
+
+:global(.dark) .closeButton:hover {
+    background: rgba(255, 107, 107, 0.3);
+    color: #ffffff;
+}
+
+/* Navigation Content */
+.navContent {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+/* Section */
+.section {
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #71717a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+}
+
+/* Dark mode section title */
+:global(.dark) .sectionTitle {
+    color: #ffffff !important;
+}
+
+/* Link Grid */
+.linkGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Navigation link item */
+.navLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    font-weight: 500;
+    color: #0c1507;
+    text-decoration: none;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease-in-out;
+}
+
+.navLink:hover {
+    background: rgba(255, 192, 203, 0.4);
+    transform: translateX(4px);
+    color: #d83e3e;
+    border-color: rgba(216, 62, 62, 0.3);
+}
+
+/* Dark mode nav link */
+:global(.dark) .navLink {
+    color: #ffffff !important;
+    background: rgba(24, 24, 24, 0.9);
+    border: 1px solid rgba(245, 245, 245, 0.1);
+}
+
+:global(.dark) .navLink:hover {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ffffff !important;
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+/* Link Icon */
+.linkIcon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    width: 1.5rem;
+    text-align: center;
+}
+
+/* Source Icon */
+.sourceIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Link Content */
+.linkContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.linkLabel {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.linkDescription {
+    font-size: 0.75rem;
+    color: #71717a;
+    line-height: 1.2;
+    margin-top: 0.125rem;
+}
+
+/* Dark mode link description */
+:global(.dark) .linkDescription {
+    color: #e5e5e5 !important;
+}
+
+/* Quick Actions */
+.quickActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode quick actions */
+:global(.dark) .quickActions {
+    border-top: 1px solid rgba(245, 245, 245, 0.1);
+}
+
+.quickActionButton {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(216, 62, 62, 0.1) 0%, rgba(255, 192, 203, 0.1) 100%);
+    border: 1px solid rgba(216, 62, 62, 0.2);
+    border-radius: 0.75rem;
+    color: #d83e3e;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.quickActionButton:hover {
+    background: linear-gradient(135deg, rgba(216, 62, 62, 0.2) 0%, rgba(255, 192, 203, 0.2) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(216, 62, 62, 0.2);
+}
+
+.quickActionIcon {
+    font-size: 1.25rem;
+}
+
+/* Footer */
+.footer {
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark mode footer */
+:global(.dark) .footer {
+    border-top: 1px solid rgba(245, 245, 245, 0.1);
+    background: rgba(31, 31, 31, 0.1);
+}
+
+.footerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footerText {
+    font-size: 0.75rem;
+    color: #71717a;
+    text-align: center;
+    font-weight: 500;
+}
+
+.footerLinks {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footerLink {
+    font-size: 0.75rem;
+    color: #71717a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+    color: #d83e3e;
+}
+
+/* Dark mode footer */
+:global(.dark) .footerText {
+    color: #ffffff !important;
+}
+
+:global(.dark) .footerLink {
+    color: #ffffff !important;
+}
+
+:global(.dark) .footerLink:hover {
+    color: #ff6b6b !important;
+}
+
+/* Additional dark mode text fixes */
+:global(.dark) .linkLabel {
+    color: #ffffff !important;
+}
+
+/* Ensure all text elements in dark mode are white */
+:global(.dark) .navContent * {
+    color: #ffffff !important;
+}
+
+/* Override any remaining dark text */
+:global(.dark) .drawer * {
+    color: #ffffff !important;
+}
+
+/* Keyframe animation */
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .drawer {
+        width: 100%;
+    }
+    :global(.dark) .drawer {
+        background: #1f2937;
+        border-right: 1px solid rgba(245, 245, 245, 0.2);
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .navLink {
+        padding: 0.625rem;
+    }
+
+    .linkLabel {
+        font-size: 0.8125rem;
+    }
+
+    .linkDescription {
+        font-size: 0.6875rem;
+    }
+
+    .quickActionButton {
+        padding: 0.875rem;
+        font-size: 0.8125rem;
+    }
+
+    /* Enhanced mobile dark mode contrast */
+    :global(.dark) .navLink {
+        color: #ffffff !important;
+        background: rgba(31, 41, 55, 0.9);
+        border: 1px solid rgba(245, 245, 245, 0.2);
+    }
+
+    :global(.dark) .navLink:hover {
+        background: rgba(255, 107, 107, 0.3);
+        color: #ffffff !important;
+        border-color: rgba(255, 107, 107, 0.4);
+    }
+
+    :global(.dark) .linkLabel {
+        color: #ffffff !important;
+    }
+
+    :global(.dark) .linkDescription {
+        color: #e5e7eb !important;
+    }
+}

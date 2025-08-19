@@ -1,0 +1,47 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2rem;
+  max-width: 100%;
+}
+
+/* Grid layout for larger screens */
+@media (min-width: 768px) {
+  .list {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Masonry-like layout */
+.list.masonry {
+  columns: 1;
+  column-gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .list.masonry {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .list.masonry {
+    columns: 3;
+  }
+}
+
+.list.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .list {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+}

@@ -1,0 +1,48 @@
+.main {
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 40rem;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Container variants */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.container-sm {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.container-lg {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main {
+    width: 95%;
+    margin: 2rem auto;
+    padding: 0 0.5rem;
+  }
+
+  .container,
+  .container-sm,
+  .container-lg {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    max-width: 50rem;
+  }
+}

@@ -1,0 +1,103 @@
+/* ThemeToggle.module.css */
+
+.button {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+.button:hover {
+    background: rgba(255,255,255,0.4);
+    border-color: rgba(168,85,247,0.5);
+    box-shadow: 0 2px 16px 0 rgba(168,85,247,0.1);
+}
+.dark .button {
+    background: rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.icon {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.sun {
+    position: absolute;
+    inset: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: all 0.5s;
+    color: #27272a;
+}
+.dark .sun {
+    color: #e5e5e5;
+}
+
+.moon {
+    position: absolute;
+    inset: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: all 0.5s;
+    color: #0c1507;
+}
+.dark .moon {
+    color: #e5e5e5;
+}
+
+.glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    transition: all 0.5s;
+    opacity: 0;
+    pointer-events: none;
+}
+.button:hover .glow {
+    opacity: 1;
+}
+.glowLight {
+    background: rgba(253,224,71,0.2);
+    box-shadow: 0 0 16px 0 rgba(253,224,71,0.3);
+}
+.glowDark {
+    background: rgba(96,165,250,0.2);
+    box-shadow: 0 0 16px 0 rgba(96,165,250,0.3);
+}
+
+/* Mobile-specific dark mode improvements */
+@media (max-width: 768px) {
+    .dark .button {
+        background: rgba(31, 41, 55, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark .button:hover {
+        background: rgba(31, 41, 55, 0.9);
+        border-color: rgba(168, 85, 247, 0.6);
+        box-shadow: 0 2px 16px 0 rgba(168, 85, 247, 0.2);
+    }
+
+    .dark .sun,
+    .dark .moon {
+        color: #ffffff;
+    }
+}
+
+@media (max-width: 480px) {
+    .dark .button {
+        background: rgba(31, 41, 55, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+}
