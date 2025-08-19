@@ -1,0 +1,1424 @@
+@import "tailwindcss";
+
+:root {
+    /* Light theme variables (default) */
+    --background: transparent;
+    --foreground: #401210;
+    --blue: #7AD1ED;
+    --red: rgb(220, 71, 38);
+    --white: #F1EBDF;
+    --dark-blue: rgb(43, 84, 165);
+    --yellow: rgb(246, 184, 22);
+    --green: #5C9842;
+    --black: #401210;
+
+    /* Theme-aware semantic colors */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-text-primary: #401210;
+    --color-text-secondary: #6b7280;
+    --color-border: rgba(255, 255, 255, 0.3);
+    --color-glass-bg: rgba(255, 255, 255, 0.25);
+    --color-glass-border: rgba(255, 255, 255, 0.4);
+}
+
+/* Dark theme variables - only applied when .dark class is present */
+.dark {
+    --background: #401210;
+    --foreground: #F1EBDF;
+    --color-background: #111111;
+    --color-foreground: #ffffff;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e5e5e5;
+    --color-border: rgba(245, 245, 245, 0.1);
+    --color-glass-bg: rgba(31, 31, 31, 0.3);
+    --color-glass-border: rgba(245, 245, 245, 0.1);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+body {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #e2e8f0 75%, #cbd5e1 100%);
+    background-size: 400% 400%;
+    color: var(--color-text-primary);
+    font-family: var(--font-inter, Arial, Helvetica, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    animation: glass-bg-move 30s ease-in-out infinite alternate;
+    position: relative;
+    transition: background 0.5s ease, color 0.3s ease;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+            radial-gradient(circle at 20% 80%, rgba(148, 163, 184, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(100, 116, 139, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(71, 85, 105, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 60% 60%, rgba(51, 65, 85, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    transition: background 0.5s ease;
+}
+
+/* Dark mode styles */
+.dark body {
+    background: var(--color-background);
+    color: var(--color-text-primary);
+}
+
+.dark body::before {
+    background: none;
+}
+
+/* Light mode text - ensure proper dark text on light background */
+body:not(.dark) h1, body:not(.dark) h2, body:not(.dark) h3,
+body:not(.dark) h4, body:not(.dark) h5, body:not(.dark) h6 {
+    color: var(--color-text-primary);
+}
+
+body:not(.dark) p, body:not(.dark) span, body:not(.dark) div {
+    color: var(--color-text-primary);
+}
+
+body:not(.dark) a {
+    color: var(--color-text-primary);
+}
+
+body:not(.dark) a:hover {
+    color: #1d4ed8;
+}
+
+/* Dark mode text improvements - systematic approach */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: var(--color-text-primary);
+}
+
+.dark p, .dark span, .dark div {
+    color: var(--color-text-primary);
+}
+
+.dark a {
+    color: var(--color-text-primary);
+}
+
+.dark a:hover {
+    color: #93c5fd;
+}
+
+/* Dark mode Tailwind class overrides - reduced specificity */
+.dark .text-zinc-800,
+.dark .text-zinc-700,
+.dark .text-zinc-600 {
+    color: #f5f5f5;
+}
+
+.dark .text-blue-700,
+.dark .text-blue-600 {
+    color: #93c5fd;
+}
+
+.dark .text-red-700,
+.dark .text-red-600 {
+    color: #fca5a5;
+}
+
+.dark .text-orange-700,
+.dark .text-orange-600 {
+    color: #fdba74;
+}
+
+.dark .text-gray-800,
+.dark .text-gray-700,
+.dark .text-gray-600 {
+    color: #e5e5e5;
+}
+
+.dark .text-zinc-500 {
+    color: #d1d5db;
+}
+
+.dark .text-zinc-400 {
+    color: #e5e7eb;
+}
+
+
+
+/* Dark mode background improvements */
+.dark .bg-white\/25,
+.dark .bg-white\/20,
+.dark .bg-white\/10 {
+    background-color: var(--color-glass-bg);
+}
+
+.dark .bg-zinc-50,
+.dark .bg-zinc-100,
+.dark .bg-zinc-200 {
+    background-color: #374151;
+}
+
+/* Dark mode border improvements */
+.dark .border-white\/30,
+.dark .border-white\/20 {
+    border-color: var(--color-border);
+}
+
+.dark .border-zinc-300,
+.dark .border-zinc-200 {
+    border-color: #4b5563;
+}
+
+@keyframes glass-bg-move {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(100, 116, 139, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(100, 116, 139, 0.4); }
+}
+
+.dark @keyframes glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(148, 163, 184, 0.4); }
+          50% { box-shadow: 0 0 40px rgba(148, 163, 184, 0.7); }
+      }
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(100, 116, 139, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(100, 116, 139, 0.3);
+    }
+}
+
+.dark @keyframes pulse-glow {
+          0%, 100% {
+              box-shadow: 0 0 20px rgba(148, 163, 184, 0.35);
+          }
+          50% {
+              box-shadow: 0 0 30px rgba(148, 163, 184, 0.6);
+          }
+      }
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Animation classes */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+    animation: slide-in-left 0.8s ease-out;
+}
+
+.animate-slide-in-right {
+    animation: slide-in-right 0.8s ease-out;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Enhanced glassmorphism effects */
+.glass-card {
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass-card {
+    background: var(--color-glass-bg);
+    border: 1px solid var(--color-glass-border);
+    box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(245, 245, 245, 0.05);
+}
+
+.dark .glass-card:hover {
+    background: rgba(31, 31, 31, 0.5);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(245, 245, 245, 0.1);
+}
+
+.dark .glass-card:hover {
+    background: rgba(31, 31, 31, 0.4);
+    border: 1px solid rgba(245, 245, 245, 0.15);
+    box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(245, 245, 245, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Gradient text effects */
+.gradient-text {
+    background: linear-gradient(135deg, #475569 0%, #64748b 50%, #94a3b8 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite;
+}
+
+.dark .gradient-text {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background-clip: unset !important;
+    color: #ffffff !important;
+    animation: none !important;
+}
+
+/* Enhanced button styles */
+.modern-button {
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.1) 0%, rgba(148, 163, 184, 0.1) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.modern-button:hover::before {
+    left: 100%;
+}
+
+.modern-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(100, 116, 139, 0.3);
+}
+
+.dark .modern-button {
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.1) 0%, rgba(229, 229, 229, 0.1) 100%);
+    border: 1px solid rgba(245, 245, 245, 0.15);
+    color: #f5f5f5;
+}
+
+.dark .modern-button:hover {
+    box-shadow: 0 10px 25px rgba(245, 245, 245, 0.3);
+    color: #ffffff;
+}
+
+@font-face {
+    font-family: 'More Sugar';
+    src: url('../public/fonts/StrawberryBubblegum.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+input, button {
+    font-family: inherit;
+    outline: none;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Lato', sans-serif;
+}
+
+/* Enhanced form elements */
+input:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: rgba(168, 85, 247, 0.5);
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.5) 0%, rgba(148, 163, 184, 0.5) 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.7) 0%, rgba(148, 163, 184, 0.7) 100%);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.3) 0%, rgba(229, 229, 229, 0.3) 100%);
+    border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.5) 0%, rgba(229, 229, 229, 0.5) 100%);
+}
+
+/* Hide scrollbar for virtualized list */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .glass-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .gradient-text {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .glass-card {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+
+    .gradient-text {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-hero-strawberry {
+        font-size: 1.6rem !important;
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-image: none;
+    }
+
+    /* Light mode mobile background */
+    body:not(.dark) {
+        background: #ffffff;
+    }
+
+    /* Dark mode mobile background */
+    .dark body {
+        background: #111111;
+    }
+}
+
+/* Remove forced background override - let theme system handle it */
+html, body {
+    background: inherit;
+}
+
+.dark html, .dark body {
+    background: var(--color-background);
+}
+
+.MainNavigation_logoText__HdrmW,
+.dark .MainNavigation_logoText__HdrmW {
+    color: #0c1507;
+}
+
+/* Theme-aware comment/description backgrounds */
+.my-black-bg {
+    background: var(--color-glass-bg);
+    border: 1px solid var(--color-border);
+}
+
+/* Enhanced theme transitions and accessibility */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Ensure proper contrast in dark mode */
+.dark {
+    color-scheme: dark;
+}
+
+:root {
+    color-scheme: light;
+}
+
+/* Fix any remaining text visibility issues */
+.dark .text-transparent {
+    color: transparent;
+}
+
+.dark .bg-clip-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+/* Improved focus states for accessibility */
+.dark button:focus,
+.dark a:focus,
+.dark input:focus,
+.dark textarea:focus {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+/* Better mobile theme handling */
+@media (max-width: 480px) {
+    .dark body {
+        background: var(--color-background);
+    }
+}
+
+
+
+/* Proper prose styling for both light and dark modes */
+.prose,
+.prose-lg {
+    color: var(--color-text-primary);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    color: var(--color-text-primary);
+}
+
+.prose p,
+.prose li,
+.prose span {
+    color: var(--color-text-primary);
+}
+
+/* Dark mode prose overrides */
+.dark .prose,
+.dark .prose-lg {
+    color: #ffffff;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+    color: #ffffff;
+}
+
+.dark .prose p,
+.dark .prose li,
+.dark .prose span {
+    color: #ffffff;
+}
+
+.dark .prose strong {
+    color: #ffffff;
+}
+
+/* Fix hardcoded Tailwind colors in terms/privacy pages */
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700 {
+    color: #ffffff !important;
+}
+
+.dark .text-blue-700 {
+    color: #93c5fd !important;
+}
+
+.dark .text-blue-600 {
+    color: #60a5fa !important;
+}
+
+.dark .text-yellow-700 {
+    color: #fcd34d !important;
+}
+
+/* Fix background colors for info boxes */
+.dark .bg-blue-50 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.dark .bg-gray-50 {
+    background-color: #374151 !important;
+}
+
+.dark .bg-yellow-50 {
+    background-color: rgba(245, 158, 11, 0.1) !important;
+}
+
+/* Ensure all text in these pages is visible */
+.dark .text-black {
+    color: #ffffff !important;
+}
+
+/* Mobile-specific dark mode contrast improvements */
+@media (max-width: 768px) {
+    .dark {
+        /* Enhanced contrast for mobile screens */
+        --color-text-primary: #ffffff;
+        --color-text-secondary: #f3f4f6;
+    }
+
+    /* Improve text contrast on mobile */
+    .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+        color: #ffffff !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark p, .dark span, .dark div, .dark li {
+        color: #f9fafb !important;
+    }
+
+    .dark a {
+        color: #ffffff !important;
+    }
+
+    .dark a:hover {
+        color: #93c5fd !important;
+    }
+
+    /* Improve secondary text visibility */
+    .dark .text-zinc-700,
+    .dark .text-zinc-600,
+    .dark .text-zinc-500,
+    .dark .text-zinc-400 {
+        color: #e5e7eb !important;
+    }
+
+    /* Better button text contrast */
+    .dark button {
+        color: #ffffff !important;
+    }
+
+    /* Navigation text improvements */
+    .dark nav a,
+    .dark .nav-link {
+        color: #ffffff !important;
+    }
+
+    /* Form elements */
+    .dark input,
+    .dark textarea,
+    .dark select {
+        color: #ffffff !important;
+        background-color: #374151 !important;
+    }
+
+    .dark input::placeholder,
+    .dark textarea::placeholder {
+        color: #d1d5db !important;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .dark {
+        /* Maximum contrast for small screens */
+        --color-text-primary: #ffffff;
+        --color-text-secondary: #ffffff;
+    }
+
+    /* Force high contrast text on very small screens */
+    .dark * {
+        color: #ffffff !important;
+    }
+
+    /* Exception for links to maintain usability */
+    .dark a {
+        color: #93c5fd !important;
+    }
+
+    .dark a:hover {
+        color: #dbeafe !important;
+    }
+
+    /* Exception for buttons to maintain styling */
+    .dark button {
+        color: inherit !important;
+    }
+
+    /* Exception for icons and decorative elements */
+    .dark .icon,
+    .dark .emoji,
+    .dark [role="img"] {
+        color: inherit !important;
+    }
+}
+
+/* CRITICAL: Light mode text must be dark */
+body:not(.dark) .prose h1, body:not(.dark) .prose h2, body:not(.dark) .prose h3,
+body:not(.dark) .prose h4, body:not(.dark) .prose h5, body:not(.dark) .prose h6,
+body:not(.dark) .prose p, body:not(.dark) .prose li, body:not(.dark) .prose ul,
+body:not(.dark) .prose ol, body:not(.dark) .prose section {
+    color: #000 !important;
+}
+
+/* COMPREHENSIVE DARK MODE TEXT FIXES - ALL SCREEN SIZES */
+/* Override all Tailwind text color classes */
+.dark .text-zinc-800, .dark .text-zinc-700, .dark .text-zinc-600,
+.dark .text-zinc-500, .dark .text-zinc-400,
+.dark .text-gray-900, .dark .text-gray-800, .dark .text-gray-700,
+.dark .text-gray-600, .dark .text-gray-500,
+.dark .text-black, .dark [class*="text-black"] {
+    color: #ffffff !important;
+}
+
+/* Specific PostDetail.js and CommentSection.js text elements */
+.dark .post-detail-title,
+.dark .post-detail-h3,
+.dark .post-detail-p,
+.dark .post-detail-description {
+    color: #ffffff !important;
+}
+
+/* Badge and colored text elements in dark mode */
+.dark .text-purple-700 {
+    color: #c084fc !important;
+}
+
+.dark .text-red-700 {
+    color: #fca5a5 !important;
+}
+
+.dark .text-orange-700 {
+    color: #fdba74 !important;
+}
+
+.dark .text-green-700 {
+    color: #86efac !important;
+}
+
+.dark .text-blue-700 {
+    color: #93c5fd !important;
+}
+
+/* Ensure all text in PostDetail and CommentSection is white */
+.dark .post-detail-main-card *,
+.dark .post-detail-main-card h1,
+.dark .post-detail-main-card h2,
+.dark .post-detail-main-card h3,
+.dark .post-detail-main-card p,
+.dark .post-detail-main-card span:not(.text-purple-700):not(.text-red-700):not(.text-orange-700):not(.text-green-700):not(.text-blue-700) {
+    color: #ffffff !important;
+}
+
+/* CommentSection specific dark mode fixes */
+.dark .bg-white\/30 *,
+.dark .bg-white\/20 * {
+    color: #ffffff !important;
+}
+
+/* Related posts section */
+.dark .bg-white\/25 *:not(.text-purple-700):not(.text-red-700):not(.text-orange-700):not(.text-green-700):not(.text-blue-700) {
+    color: #ffffff !important;
+}
+
+/* Breadcrumb navigation */
+.dark nav *,
+.dark .text-zinc-600,
+.dark .text-zinc-800 {
+    color: #ffffff !important;
+}
+
+/* Component content */
+.dark .glass-card *,
+.dark .post-item *,
+.dark nav *,
+.dark .prose *,
+.dark .prose-lg * {
+    color: #ffffff !important;
+}
+
+/* Links maintain distinction */
+.dark a:hover {
+    color: #93c5fd !important;
+}
+
+/* Input elements */
+.dark input, .dark textarea, .dark select {
+    color: #ffffff !important;
+    background-color: rgba(31, 31, 31, 0.8) !important;
+}
+
+.dark input::placeholder, .dark textarea::placeholder {
+    color: #d1d5db !important;
+}
+
+/* NAVMENU COMPONENT SPECIFIC DARK MODE FIXES */
+/* Target all NavMenu text elements specifically */
+.dark nav h1,
+.dark nav h2,
+.dark nav h3,
+.dark nav h4,
+.dark nav p,
+.dark nav span,
+.dark nav a,
+.dark nav li,
+.dark nav div,
+.dark nav button {
+    color: #ffffff !important;
+}
+
+/* NavMenu CSS Module class overrides */
+.dark .NavMenu_logo__*,
+.dark .NavMenu_sectionTitle__*,
+.dark .NavMenu_linkLabel__*,
+.dark .NavMenu_linkDescription__*,
+.dark .NavMenu_footerText__*,
+.dark .NavMenu_footerLink__* {
+    color: #ffffff !important;
+}
+
+/* NavMenu specific element targeting */
+
+.dark nav .sectionTitle,
+.dark nav .linkLabel,
+.dark nav .linkDescription,
+.dark nav .footerText,
+.dark nav .footerLink {
+    color: #ffffff !important;
+}
+
+/* FOOTER COMPONENT SPECIFIC DARK MODE FIXES */
+/* Target all Footer text elements specifically */
+.dark footer h3,
+.dark footer h4,
+.dark footer p,
+.dark footer span,
+.dark footer a,
+.dark footer li,
+.dark footer div {
+    color: #ffffff !important;
+}
+
+/* Specific Footer Tailwind class overrides */
+.dark footer .text-zinc-800,
+.dark footer .text-zinc-600,
+.dark footer h3.text-zinc-800,
+.dark footer h4.text-zinc-800,
+.dark footer p.text-zinc-600,
+.dark footer span.text-zinc-600,
+.dark footer div.text-zinc-600,
+.dark footer a.text-zinc-600 {
+    color: #ffffff !important;
+}
+
+/* Footer links hover states */
+.dark footer a.text-zinc-600:hover,
+.dark footer a:hover {
+    color: #c084fc !important;
+}
+
+/* CATEGORY HEADER AND SOURCE NAVIGATION DARK MODE FIXES */
+/* Fix text-[#0c1507] classes used in CategoryHeader and SourceNavigation */
+.dark h1[class*="text-[#0c1507]"],
+.dark div[class*="text-[#0c1507]"],
+.dark span[class*="text-[#0c1507]"],
+.dark a[class*="text-[#0c1507]"] {
+    color: #ffffff !important;
+}
+
+/* COLLECTIONS PAGE DARK MODE FIXES */
+/* Collections description text */
+.dark div[class*="text-[#0c1507]"] {
+    color: #ffffff !important;
+}
+
+/* CATEGORY AND SOURCE PAGE NAVIGATION DARK MODE FIXES */
+.dark button[class*="text-blue-700"] {
+    color: #93c5fd !important;
+}
+
+.dark button[class*="text-blue-700"]:hover {
+    color: #dbeafe !important;
+}
+
+/* PAGINATION AND ERROR MESSAGES DARK MODE FIXES */
+.dark button[class*="text-zinc-700"] {
+    color: #ffffff !important;
+}
+
+.dark p[class*="text-zinc-600"],
+.dark p[class*="text-zinc-500"] {
+    color: #ffffff !important;
+}
+
+/* COMPREHENSIVE DARK MODE TEXT OVERRIDE - HIGHEST PRIORITY */
+/* This catches any remaining dark text that might be missed */
+.dark *[class*="text-zinc-800"],
+.dark *[class*="text-zinc-700"],
+.dark *[class*="text-zinc-600"],
+.dark *[class*="text-zinc-500"],
+.dark *[class*="text-gray-800"],
+.dark *[class*="text-gray-700"],
+.dark *[class*="text-gray-600"],
+.dark *[class*="text-[#0c1507]"] {
+    color: #ffffff !important;
+}
+
+/* PRIVACY POLICY AND TERMS OF SERVICE DARK MODE FIXES */
+/* Fix hardcoded dark text colors in legal pages */
+.dark .text-black,
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-zinc-800,
+.dark .text-zinc-700 {
+    color: #ffffff !important;
+}
+
+/* Legal pages prose content */
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6,
+.dark .prose p,
+.dark .prose li,
+.dark .prose span,
+.dark .prose div {
+    color: #ffffff !important;
+}
+
+/* Legal pages background colors */
+.dark .bg-gray-50 {
+    background-color: rgba(31, 31, 31, 0.8) !important;
+}
+
+.dark .bg-yellow-50 {
+    background-color: rgba(59, 59, 0, 0.3) !important;
+}
+
+.dark .text-yellow-700 {
+    color: #fbbf24 !important;
+}
+
+/* Legal pages links */
+.dark .text-blue-600 {
+    color: #93c5fd !important;
+}
+
+/* Fix bg-white/10 and border-white/20 classes in dark mode */
+.dark .bg-white\/10 {
+    background-color: rgba(31, 31, 31, 0.3) !important;
+}
+
+.dark .border-white\/20 {
+    border-color: rgba(245, 245, 245, 0.1) !important;
+}
+
+/* Additional white background overrides for dark mode */
+.dark .bg-white\/20 {
+    background-color: rgba(31, 31, 31, 0.4) !important;
+}
+
+.dark .bg-white\/25 {
+    background-color: rgba(31, 31, 31, 0.5) !important;
+}
+
+.dark .bg-white\/30 {
+    background-color: rgba(31, 31, 31, 0.6) !important;
+}
+
+/* LAYOUT COMPONENT DARK MODE FIXES */
+/* Fix Layout_main CSS module class */
+.dark .Layout_main__* {
+    background-color: transparent !important;
+    color: #ffffff !important;
+}
+
+/* Layout component search bar dark mode */
+.dark .bg-white\/60 {
+    background-color: rgba(31, 31, 31, 0.8) !important;
+}
+
+.dark .border-white\/30 {
+    border-color: rgba(245, 245, 245, 0.2) !important;
+}
+
+.dark .text-zinc-900 {
+    color: #ffffff !important;
+}
+
+.dark .placeholder-zinc-400::placeholder {
+    color: #9ca3af !important;
+}
+
+/* FIX BLUR EFFECTS CAUSING CONTENT TO BECOME BLURRED */
+/* Disable backdrop-blur effects that might be causing the blurring issue */
+.dark .backdrop-blur-xl,
+.dark .backdrop-blur-lg,
+.dark .backdrop-blur-md,
+.dark .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Specifically target legal pages to prevent blur effects */
+.dark .prose .backdrop-blur-xl,
+.dark .prose .backdrop-blur-lg,
+.dark .prose .backdrop-blur-md,
+.dark .prose .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Remove any filter blur effects that might be applied */
+.dark .prose *,
+.dark .max-w-4xl *,
+.dark .Layout_main__* * {
+    filter: none !important;
+    -webkit-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Specifically target CategoryHeader and similar components */
+.dark h1[class*="backdrop-blur"],
+.dark div[class*="backdrop-blur"],
+.dark section[class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Emergency override for any remaining blur effects */
+.dark * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* TERMS OF SERVICE AND PRIVACY POLICY SPECIFIC FIXES */
+/* Ensure all prose content is readable in dark mode */
+.dark .prose,
+.dark .prose-lg {
+    color: #ffffff !important;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+    color: #ffffff !important;
+}
+
+.dark .prose p,
+.dark .prose li,
+.dark .prose span,
+.dark .prose div {
+    color: #ffffff !important;
+}
+
+/* Override any remaining hardcoded colors */
+.dark .prose .text-black,
+.dark .prose .text-gray-900,
+.dark .prose .text-gray-800,
+.dark .prose .text-zinc-800 {
+    color: #ffffff !important;
+}
+
+/* Ensure proper contrast for legal page elements */
+.dark .max-w-4xl {
+    background: transparent !important;
+}
+
+.dark .max-w-4xl * {
+    color: #ffffff !important;
+}
+
+/* COMPREHENSIVE DIV, P, LI, AND H3 ELEMENT FIXES */
+/* Target all divs, paragraphs, list items, and h3 elements in dark mode */
+.dark div,
+.dark p,
+.dark li,
+.dark h3,
+.dark span,
+.dark strong,
+.dark em {
+    color: #ffffff !important;
+}
+
+/* Specific targeting for legal pages */
+.dark .prose div,
+.dark .prose p,
+.dark .prose li,
+.dark .prose h3,
+.dark .prose span,
+.dark .prose strong,
+.dark .prose h3,
+.dark .prose em {
+    color: #ffffff !important;
+}
+
+/* Target elements within max-w-4xl containers */
+.dark .max-w-4xl div,
+.dark .max-w-4xl p,
+.dark .max-w-4xl li,
+.dark .max-w-4xl h3,
+.dark .max-w-4xl span,
+.dark .max-w-4xl strong,
+.dark .max-w-4xl em {
+    color: #ffffff !important;
+}
+
+/* Override any remaining Tailwind text color utilities */
+.dark div[class*="text-"],
+.dark p[class*="text-"],
+.dark li[class*="text-"],
+.dark h3[class*="text-"],
+.dark span[class*="text-"] {
+    color: #ffffff !important;
+}
+
+/* Exception for colored elements that should maintain their colors */
+.dark .text-blue-600,
+.dark .text-blue-400,
+.dark .text-red-700,
+.dark .text-red-300,
+.dark .text-yellow-700,
+.dark .text-yellow-300,
+.dark .text-green-700,
+.dark .text-green-300,
+.dark .text-purple-700,
+.dark .text-purple-300 {
+    /* These keep their specified colors for links, warnings, etc. */
+}
+
+/* ULTIMATE FALLBACK RULES */
+/* Catch any remaining text elements that might be missed */
+.dark section div,
+.dark section p,
+.dark section li,
+.dark section h3,
+.dark section span,
+.dark article div,
+.dark article p,
+.dark article li,
+.dark article h3,
+.dark article span {
+    color: #ffffff !important;
+}
+
+/* Target by element type regardless of classes */
+.dark main div:not([class*="bg-"]):not([class*="border-"]),
+.dark main p:not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-green"]):not([class*="text-purple"]),
+.dark main li:not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-green"]):not([class*="text-purple"]),
+.dark main h3:not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-green"]):not([class*="text-purple"]),
+.dark main span:not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-green"]):not([class*="text-purple"]) {
+    color: #ffffff !important;
+}
+
+/* ADDITIONAL H3 SPECIFIC TARGETING */
+/* Ensure all h3 elements are white in dark mode */
+.dark h3 {
+    color: #ffffff !important;
+}
+
+/* Target h3 elements with any text color class */
+.dark h3[class*="text-zinc"],
+.dark h3[class*="text-gray"],
+.dark h3[class*="text-black"] {
+    color: #ffffff !important;
+}
+
+/* H3 elements within specific containers */
+.dark .prose h3,
+.dark .max-w-4xl h3,
+.dark section h3,
+.dark article h3,
+.dark main h3 {
+    color: #ffffff !important;
+}
+
+/* SPECIFIC LEGAL TEXT TARGETING */
+/* Target the privacy policy notice text */
+.dark .bg-yellow-50 p,
+.dark .bg-yellow-50 .text-yellow-700,
+.dark .border-yellow-400 p,
+.dark .border-yellow-500 p {
+    color: #fbbf24 !important; /* Light yellow for better contrast */
+}
+
+/* Target the liability disclaimer text */
+.dark .bg-red-50 p,
+.dark .bg-red-50 .text-red-700,
+.dark .border-red-400 p,
+.dark .border-red-500 p,
+.dark .bg-red-50 ul,
+.dark .bg-red-50 li {
+    color: #fca5a5 !important; /* Light red for better contrast */
+}
+
+/* Ensure strong/bold text within these sections is visible */
+.dark .bg-yellow-50 strong,
+.dark .bg-red-50 strong,
+.dark .border-yellow-400 strong,
+.dark .border-red-400 strong {
+    color: inherit !important;
+    font-weight: bold !important;
+}
+
+/* Target any text containing specific legal phrases */
+.dark p:has-text("By accessing or using this application"),
+.dark p:has-text("TO THE MAXIMUM EXTENT PERMITTED BY LAW") {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+}
+
+/* Alternative targeting for legal notice boxes */
+.dark div[class*="bg-yellow"] *,
+.dark div[class*="border-yellow"] * {
+    color: #fbbf24 !important;
+}
+
+.dark div[class*="bg-red"] *,
+.dark div[class*="border-red"] * {
+    color: #fca5a5 !important;
+}
+
+/* ENHANCED TARGETING FOR SPECIFIC LEGAL TEXTS */
+/* Target warning/notice boxes more specifically */
+.dark .bg-yellow-50.dark\\:bg-yellow-900\\/20 p,
+.dark .bg-yellow-50.dark\\:bg-yellow-900\\/20 .text-yellow-700.dark\\:text-yellow-300 {
+    color: #fbbf24 !important;
+}
+
+.dark .bg-red-50.dark\\:bg-red-900\\/20 p,
+.dark .bg-red-50.dark\\:bg-red-900\\/20 .text-red-700.dark\\:text-red-300 {
+    color: #fca5a5 !important;
+}
+
+/* Ensure all text in colored boxes is visible */
+.dark [class*="bg-yellow"] p,
+.dark [class*="bg-yellow"] span,
+.dark [class*="bg-yellow"] strong,
+.dark [class*="bg-yellow"] li {
+    color: #fbbf24 !important;
+}
+
+.dark [class*="bg-red"] p,
+.dark [class*="bg-red"] span,
+.dark [class*="bg-red"] strong,
+.dark [class*="bg-red"] li {
+    color: #fca5a5 !important;
+}
+
+/* Ultimate fallback for important legal text */
+.dark .text-sm.text-yellow-700,
+.dark .text-sm.text-red-700 {
+    color: #ffffff !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    padding: 2px 4px !important;
+    border-radius: 2px !important;
+}
+
+/* DATE TEXT TARGETING */
+/* Target effective date and last updated text */
+.dark .text-sm.text-blue-700,
+.dark .text-sm.text-blue-700.dark\\:text-blue-300 {
+    color: #93c5fd !important;
+}
+
+/* Target date text within blue boxes */
+.dark .bg-blue-50 .text-blue-700,
+.dark .bg-blue-50.dark\\:bg-blue-900\\/20 .text-blue-700.dark\\:text-blue-300,
+.dark .border-blue-400 .text-blue-700,
+.dark .border-blue-500 .text-blue-700 {
+    color: #93c5fd !important;
+}
+
+/* Ensure all text in blue info boxes is visible */
+.dark [class*="bg-blue"] p,
+.dark [class*="bg-blue"] span,
+.dark [class*="bg-blue"] strong,
+.dark [class*="bg-blue"] br {
+    color: #93c5fd !important;
+}
+
+/* Target specific date format text */
+.dark .text-sm p,
+.dark .text-sm span {
+    color: #93c5fd !important;
+}
+
+/* Alternative targeting for blue boxes */
+.dark div[class*="bg-blue"] *,
+.dark div[class*="border-blue"] * {
+    color: #93c5fd !important;
+}
+
+/* ENHANCED DATE TEXT TARGETING */
+/* Target text containing date patterns */
+.dark p:contains("Effective Date:"),
+.dark p:contains("Last Updated:"),
+.dark span:contains("07.07.2025") {
+    color: #93c5fd !important;
+}
+
+/* Target strong/bold text within date sections */
+.dark .bg-blue-50 strong,
+.dark .border-blue-400 strong,
+.dark .border-blue-500 strong {
+    color: #93c5fd !important;
+    font-weight: bold !important;
+}
+
+/* Comprehensive blue box text coverage */
+.dark .bg-blue-50.dark\\:bg-blue-900\\/20 *,
+.dark .border-l-4.border-blue-400.dark\\:border-blue-500 * {
+    color: #93c5fd !important;
+}
+
+/* Ultimate fallback for date text */
+.dark .text-blue-700.dark\\:text-blue-300,
+.dark .text-sm.text-blue-700.dark\\:text-blue-300 {
+    color: #93c5fd !important;
+}
+
+/* NAVMENU COMPREHENSIVE OVERRIDE */
+/* Catch any NavMenu elements with dark colors */
+.dark nav *[style*="color: #0c1507"],
+.dark nav *[style*="color: #71717a"],
+.dark nav *[style*="color: rgb(12, 21, 7)"],
+.dark nav *[style*="color: rgb(113, 113, 122)"] {
+    color: #ffffff !important;
+}
+
+/* NavMenu drawer and overlay fixes */
+.dark .NavMenu_drawer__*,
+.dark .NavMenu_overlay__*,
+.dark .NavMenu_navContent__* {
+    color: #ffffff !important;
+}
+
+/* Desktop-specific theme fixes */
+@media (min-width: 769px) {
+    /* Light mode desktop - dark text on light background */
+    body:not(.dark) h1, body:not(.dark) h2, body:not(.dark) h3,
+    body:not(.dark) h4, body:not(.dark) h5, body:not(.dark) h6 {
+        color: #1f2937 !important;
+    }
+
+    body:not(.dark) p, body:not(.dark) span, body:not(.dark) div,
+    body:not(.dark) li, body:not(.dark) a {
+        color: #374151 !important;
+    }
+
+    body:not(.dark) .text-zinc-800,
+    body:not(.dark) .text-zinc-700,
+    body:not(.dark) .text-zinc-600 {
+        color: #374151 !important;
+    }
+
+    /* Override any white text in light mode */
+    body:not(.dark) [style*="color: white"],
+    body:not(.dark) [style*="color: #fff"],
+    body:not(.dark) [style*="color: #ffffff"] {
+        color: #374151 !important;
+    }
+
+    /* Desktop-specific light mode improvements only */
+}
+
